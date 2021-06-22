@@ -58,4 +58,10 @@ return [
     'mandrill' => [
         'secret' => env('MANDRILL_SECRET'),
     ],
+
+    'bml' => [
+        'username' => env('BML_USERNAME'),
+        'password' => env('BML_PASSWORD'),
+        'account_id' => env('BML_ACCOUNT_ID', 0)
+    ]
 ];

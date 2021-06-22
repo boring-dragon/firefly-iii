@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd033cd41088c7c19fba9031a13c2286",
+    "content-hash": "d1c15f8e8eb324be8db2810abe22b87c",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -58,6 +58,51 @@
                 "source": "https://github.com/Bacon/BaconQrCode/tree/2.0.3"
             },
             "time": "2020-10-30T02:02:47+00:00"
+        },
+        {
+            "name": "baraveli/bml-transaction",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/baraveli/bml-transactions.git",
+                "reference": "7375040b36d0f2162e95324a31f6c2b24fef503f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/baraveli/bml-transactions/zipball/7375040b36d0f2162e95324a31f6c2b24fef503f",
+                "reference": "7375040b36d0f2162e95324a31f6c2b24fef503f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5",
+                "symfony/var-dumper": "^5.2",
+                "vlucas/phpdotenv": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Baraveli\\BMLTransaction\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mohamed jinas",
+                    "email": "j@live.mv"
+                }
+            ],
+            "description": "PHP Package for getting transactions from BML.",
+            "support": {
+                "issues": "https://github.com/baraveli/bml-transactions/issues",
+                "source": "https://github.com/baraveli/bml-transactions/tree/v1.3"
+            },
+            "time": "2021-01-10T13:25:14+00:00"
         },
         {
             "name": "brick/math",
