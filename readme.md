@@ -1,4 +1,4 @@
-FireFly Fork That adds BML Account Support
+FireFly Fork That adds BML Transactions Auto Sync Support.
 
 https://github.com/firefly-iii/firefly-iii/
 
