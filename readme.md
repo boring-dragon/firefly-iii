@@ -22,7 +22,7 @@ php artisan bml:sync
 
 ## Cron
 
-If you want to automate the sync process from bml into firefly. Add update and add the following code to your `crontab` file. This will sync your transactions from bml into firefly every 12 hours.
+If you want to automate the sync process from bml into firefly. Update and add the following code to your `crontab` file. This will sync your transactions from bml into firefly every 12 hours.
 
 ```
 0 */12 * * * cd /path-to-your-project && php artisan bml:sync >> /dev/null 2>&1
