@@ -76,7 +76,7 @@ class BMLSyncCommand extends Command
                 collect($todays_transactions["history"])->each(function ($transaction, $key) use ($currency) {
 
                     $unique_transaction_hash  = hash('sha256', $transaction["description"] . $transaction["bookingDate"] . $transaction["amount"]);
-                    $description = $unique_transaction_hash . " - " . $transaction["description"];
+                    $description = $unique_transaction_hash . " - " . $transaction["description"] . (!empty($transaction["narrative3"])) ? " - " . $transaction["narrative3"] : "";
 
                     //Checking if amount is negative
                     if ($transaction["amount"] > 0) {
