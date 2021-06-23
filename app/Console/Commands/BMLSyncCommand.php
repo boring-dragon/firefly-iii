@@ -18,12 +18,6 @@ class BMLSyncCommand extends Command
 {
     protected $bml;
 
-    private const TRANSACTION_TYPE_WITHDRAW = "Withdrawal";
-    private const TRANSACTION_TYPE_DEPOSIT = "Deposit";
-    private const TRANSACTION_TYPE_TRANSFER = "Transfer";
-
-    private const BML_TRANSFER_CREDIT = "Transfer Credit";
-    private const BML_TRANSFER_DEBIT = "Transfer Debit";
 
     protected $mappings = [
         "Transfer Credit" => "Deposit",
@@ -81,18 +75,24 @@ class BMLSyncCommand extends Command
 
                 collect($todays_transactions["history"])->each(function ($transaction, $key) use ($currency) {
 
-                    $unique_transaction_hash  = hash('sha256',$transaction["description"].$transaction["bookingDate"].$transaction["amount"]);
+                    $unique_transaction_hash  = hash('sha256', $transaction["description"] . $transaction["bookingDate"] . $transaction["amount"]);
+                    $description = $unique_transaction_hash . " - " . $transaction["description"];
+
+                    //Checking if amount is negative
+                    if ($transaction["amount"] > 0) {
+                        $amount = (float) gmp_strval(gmp_neg($transaction["amount"]));
+                    } else {
+                        $amount = $transaction["amount"];
+                    }
 
                     $account = Account::first();
-                    $account->transactions()->create([
+                    $account->transactions()->firstOrcreate(["description" => $description], [
                         "transaction_currency_id" => $currency->id,
-                        "amount" => (string) $transaction["amount"],
-                        "description" =>  $unique_transaction_hash. " - ".$transaction["description"],
-                        "transaction_journal_id" => TransactionJournal::create([
+                        "amount" => (string) $amount,
+                        "transaction_journal_id" => TransactionJournal::firstOrcreate(["description" => $description], [
                             "user_id" => User::first()->id,
                             "transaction_type_id" => TransactionType::where('type', $this->mappings[$transaction["description"]])->first()->id,
                             "transaction_currency_id" => $currency->id,
-                            "description" => "BML - " . $transaction["description"],
                             "date" => Carbon::parse($transaction["bookingDate"]),
                             "completed" => 1,
                             "tag_count" => 0
