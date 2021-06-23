@@ -2,6 +2,8 @@ FireFly Fork That adds BML Transactions Auto Sync Support.
 
 https://github.com/firefly-iii/firefly-iii/
 
+To get BML transactions this project use [bml-transaction](https://github.com/baraveli/bml-transactions) by [Baraveli](https://github.com/baraveli)
+
 
 ## Usage
 
