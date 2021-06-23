@@ -122,11 +122,18 @@ class AmountFormat extends AbstractExtension
             'formatAmountBySymbol',
 
             static function (string $amount, string $symbol, int $decimalPlaces = null, bool $coloured = null): string {
+                ray($symbol)->green();
+                ray($amount)->green();
+                ray($decimalPlaces)->green();
                 $decimalPlaces            = $decimalPlaces ?? 2;
                 $coloured                 = $coloured ?? true;
                 $currency                 = new TransactionCurrency;
                 $currency->symbol         = $symbol;
                 $currency->decimal_places = $decimalPlaces;
+
+                ray($currency)->green();
+
+                ray(app('amount')->formatAnything($currency, $amount, $coloured))->green();
 
                 return app('amount')->formatAnything($currency, $amount, $coloured);
             },

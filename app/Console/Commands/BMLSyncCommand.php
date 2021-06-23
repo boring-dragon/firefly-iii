@@ -81,11 +81,13 @@ class BMLSyncCommand extends Command
 
                 collect($todays_transactions["history"])->each(function ($transaction, $key) use ($currency) {
 
+                    $unique_transaction_hash  = hash('sha256',$transaction["description"].$transaction["bookingDate"].$transaction["amount"]);
+
                     $account = Account::first();
                     $account->transactions()->create([
                         "transaction_currency_id" => $currency->id,
                         "amount" => (string) $transaction["amount"],
-                        "description" =>  $transaction["description"],
+                        "description" =>  $unique_transaction_hash. " - ".$transaction["description"],
                         "transaction_journal_id" => TransactionJournal::create([
                             "user_id" => User::first()->id,
                             "transaction_type_id" => TransactionType::where('type', $this->mappings[$transaction["description"]])->first()->id,
