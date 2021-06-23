@@ -48,7 +48,11 @@ class BMLSyncCommand extends Command
     {
         parent::__construct();
 
-        $this->bml = $bml;
+        $this->bml = $bml->login(
+            config('services.bml.username'),
+            config('services.bml.password'),
+            config('services.bml.account_id')
+        );
     }
 
     /**
@@ -58,11 +62,7 @@ class BMLSyncCommand extends Command
      */
     public function handle()
     {
-        $todays_transactions = $this->bml->login(
-            config('services.bml.username'),
-            config('services.bml.password'),
-            config('services.bml.account_id')
-        )->GetTodayTransactions();
+        $todays_transactions = $this->bml->GetTodayTransactions();
 
         if (count($todays_transactions["history"]) > 0) {
             DB::transaction(function () use ($todays_transactions) {
